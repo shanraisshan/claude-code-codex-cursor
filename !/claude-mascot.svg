@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="280" height="140">
+  <style>
+    .sword {
+      animation: sword-swing 0.8s ease-in-out infinite;
+      transform-origin: 100px 40px;
+    }
+    .right-arm {
+      animation: arm-swing 0.8s ease-in-out infinite;
+      transform-origin: 86px 40px;
+    }
+    @keyframes sword-swing {
+      0%, 100% { transform: rotate(-10deg); }
+      50% { transform: rotate(10deg); }
+    }
+    @keyframes arm-swing {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+  </style>
+
+  <!-- Shadow -->
+  <ellipse cx="50" cy="82" rx="22" ry="5" fill="#000" opacity="0.25"/>
+
+  <!-- Claude Character Group -->
+  <g class="claude-body">
+    <!-- Claude Orange: #E07C4C -->
+
+    <!-- Left ear -->
+    <rect x="22" y="10" width="8" height="14" fill="#E07C4C"/>
+
+    <!-- Right ear -->
+    <rect x="70" y="10" width="8" height="14" fill="#E07C4C"/>
+
+    <!-- Main body - top row (narrower) -->
+    <rect x="18" y="24" width="64" height="4" fill="#E07C4C"/>
+
+    <!-- Main body - full block -->
+    <rect x="14" y="28" width="72" height="32" fill="#E07C4C"/>
+
+    <!-- Eyes looking right -->
+    <rect x="38" y="34" width="8" height="10" fill="#000000"/>
+    <rect x="68" y="34" width="8" height="10" fill="#000000"/>
+
+    <!-- Left arm at side -->
+    <rect x="2" y="36" width="12" height="8" fill="#E07C4C"/>
+
+    <!-- Right arm extended holding sword -->
+    <rect class="right-arm" x="86" y="36" width="14" height="8" fill="#E07C4C"/>
+
+    <!-- Samurai Sword (Katana) - pointing right -->
+    <g class="sword">
+      <!-- Tsuka (handle) -->
+      <rect x="100" y="34" width="16" height="12" fill="#8B4513"/>
+      <!-- Handle wrap -->
+      <rect x="102" y="36" width="2" height="8" fill="#2C1810"/>
+      <rect x="106" y="36" width="2" height="8" fill="#2C1810"/>
+      <rect x="110" y="36" width="2" height="8" fill="#2C1810"/>
+      <!-- Tsuba (guard) -->
+      <rect x="116" y="32" width="4" height="16" rx="1" fill="#4A4A4A"/>
+      <!-- Blade -->
+      <rect x="120" y="37" width="50" height="6" fill="#C0C0C0"/>
+      <!-- Blade tip -->
+      <polygon points="170,37 170,43 178,40" fill="#C0C0C0"/>
+      <!-- Blade shine -->
+      <rect x="122" y="39" width="46" height="2" fill="#E8E8E8"/>
+      <!-- Blade edge (sharp bottom) -->
+      <rect x="120" y="42" width="50" height="1" fill="#A0A0A0"/>
+    </g>
+
+    <!-- Left leg -->
+    <rect x="24" y="60" width="12" height="14" fill="#E07C4C"/>
+
+    <!-- Right leg -->
+    <rect x="64" y="60" width="12" height="14" fill="#E07C4C"/>
+  </g>
+</svg>

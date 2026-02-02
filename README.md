@@ -1,2 +1,7 @@
 # claude-code-codex-cursor
-claude code vs codex vs cursor vs gemini cli vs opencode vs augment vs droid
+
+![AI Coding Tools](!/banner-pills.svg)
+
+![Battle of the AI Agents](!/claude-mascot.svg)
+![Battle of the AI Agents](!/cursor-mascot.svg)
+![Battle of the AI Agents](!/codex-mascot.svg)
