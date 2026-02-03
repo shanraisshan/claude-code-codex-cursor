@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="140" height="140">
+  <defs>
+    <!-- Gradient for border and chevron -->
+    <linearGradient id="geminiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4285F4"/>
+      <stop offset="50%" stop-color="#7B68EE"/>
+      <stop offset="100%" stop-color="#EA4335"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .gemini-body {
+      animation: bounce 0.4s ease-in-out infinite;
+    }
+    .left-leg {
+      animation: run-left 0.4s ease-in-out infinite;
+      transform-origin: 30px 72px;
+    }
+    .right-leg {
+      animation: run-right 0.4s ease-in-out infinite;
+      transform-origin: 54px 72px;
+    }
+    .left-arm {
+      animation: arm-run-left 0.4s ease-in-out infinite;
+      transform-origin: 18px 45px;
+    }
+    .right-arm {
+      animation: arm-run-right 0.4s ease-in-out infinite;
+      transform-origin: 66px 45px;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes run-left {
+      0%, 100% { transform: rotate(-25deg); }
+      50% { transform: rotate(25deg); }
+    }
+    @keyframes run-right {
+      0%, 100% { transform: rotate(25deg); }
+      50% { transform: rotate(-25deg); }
+    }
+    @keyframes arm-run-left {
+      0%, 100% { transform: rotate(20deg); }
+      50% { transform: rotate(-20deg); }
+    }
+    @keyframes arm-run-right {
+      0%, 100% { transform: rotate(-20deg); }
+      50% { transform: rotate(20deg); }
+    }
+    .eye {
+      animation: blink 0.8s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 42%, 50%, 100% { transform: scaleY(1); }
+      45%, 47% { transform: scaleY(0.1); }
+    }
+  </style>
+
+  <!-- Shadow -->
+  <ellipse cx="42" cy="92" rx="18" ry="4" fill="#000" opacity="0.25"/>
+
+  <!-- Gemini Character Group -->
+  <g class="gemini-body">
+    <!-- Gemini CLI Icon - Rounded rectangle with gradient border -->
+    <g transform="translate(10, 8)">
+      <!-- Outer gradient border -->
+      <rect x="0" y="0" width="64" height="64" rx="14" fill="url(#geminiGradient)"/>
+      <!-- Inner dark background -->
+      <rect x="5" y="5" width="54" height="54" rx="10" fill="#1a1a2e"/>
+      <!-- Chevron ">" symbol - thick terminal style -->
+      <g transform="translate(14, 16)">
+        <!-- Top arm of chevron -->
+        <polygon points="0,14 20,0 24,5 10,16" fill="url(#geminiGradient)"/>
+        <!-- Bottom arm of chevron -->
+        <polygon points="0,18 10,16 24,27 20,32" fill="url(#geminiGradient)"/>
+      </g>
+    </g>
+
+    <!-- Eyes positioned on the icon -->
+    <rect class="eye" x="28" y="28" width="8" height="12" rx="2" fill="#FFFFFF" style="transform-origin: 32px 34px;"/>
+    <rect class="eye" x="48" y="28" width="8" height="12" rx="2" fill="#FFFFFF" style="transform-origin: 52px 34px;"/>
+  </g>
+
+  <!-- Left arm -->
+  <rect class="left-arm" x="6" y="42" width="12" height="6" rx="2" fill="url(#geminiGradient)"/>
+
+  <!-- Right arm -->
+  <rect class="right-arm" x="66" y="42" width="12" height="6" rx="2" fill="url(#geminiGradient)"/>
+
+  <!-- Left leg -->
+  <rect class="left-leg" x="26" y="72" width="8" height="14" rx="2" fill="url(#geminiGradient)"/>
+
+  <!-- Right leg -->
+  <rect class="right-leg" x="50" y="72" width="8" height="14" rx="2" fill="url(#geminiGradient)"/>
+</svg>
