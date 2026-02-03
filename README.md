@@ -1,4 +1,4 @@
-# claude-code-codex-cursor
+# claude-code-codex-cursor-gemini
 
 ![AI Coding Tools](!/banner-pills.svg)
 
