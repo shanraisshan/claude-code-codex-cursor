@@ -6,26 +6,15 @@
 ![Battle of the AI Agents](!/cursor-mascot.svg)
 ![Battle of the AI Agents](!/codex-mascot.svg)
 
-## Context Window
+> **Last Updated:** 2026-02-03
 
-| Agent | Model | Context Window | Reference |
-|-------|-------|----------------|-----------|
-| Claude Code | Opus 4.5 | 200k | [Anthropic Models](https://docs.anthropic.com/en/docs/about-claude/models) |
-| Claude Code | Sonnet 4.5 | 200k (1M beta) | [Anthropic Models](https://docs.anthropic.com/en/docs/about-claude/models) |
-| Claude Code | Haiku 4.5 | 200k | [Anthropic Models](https://docs.anthropic.com/en/docs/about-claude/models) |
-| Codex CLI | codex-1 | 192k | [OpenAI Codex](https://developers.openai.com/codex/models/) |
-| Codex CLI | codex-mini | 200k | [OpenAI Codex](https://developers.openai.com/codex/models/) |
-| Codex CLI | o3 | 200k | [OpenAI o3](https://openai.com/index/introducing-o3-and-o4-mini/) |
-| Codex CLI | o4-mini | 200k | [OpenAI o4-mini](https://openai.com/index/introducing-o3-and-o4-mini/) |
-| Cursor | Claude 4.5 Opus | 200k | [Cursor Models](https://cursor.com/docs/models) |
-| Cursor | Claude 4.5 Sonnet | 200k (1M max) | [Cursor Models](https://cursor.com/docs/models) |
-| Cursor | Composer 1 | 200k | [Cursor Models](https://cursor.com/docs/models) |
-| Cursor | Gemini 3 Flash | 200k (1M max) | [Cursor Models](https://cursor.com/docs/models) |
-| Cursor | Gemini 3 Pro | 200k (1M max) | [Cursor Models](https://cursor.com/docs/models) |
-| Cursor | GPT-5.2 | 272k | [Cursor Models](https://cursor.com/docs/models) |
-| Cursor | GPT-5.2 Codex | 272k | [Cursor Models](https://cursor.com/docs/models) |
-| Cursor | Grok Code | 256k | [Cursor Models](https://cursor.com/docs/models) |
-| Gemini CLI | Gemini 2.5 Pro | 1M | [Gemini CLI](https://github.com/google-gemini/gemini-cli) |
-| Gemini CLI | Gemini 2.5 Flash | 1M | [Gemini CLI](https://github.com/google-gemini/gemini-cli) |
-| Gemini CLI | Gemini 3 Pro | 1M | [Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/gemini-3) |
-| Gemini CLI | Gemini 3 Flash | 1M | [Gemini 3 Flash](https://blog.google/products/gemini/gemini-3-flash/) |
+## Context Window Comparison
+
+| Tool | Largest Context | Best Model | Source |
+|------|-----------------|------------|--------|
+| Claude Code | 1M (beta) | Sonnet 4.5 with `--betas context-1m-2025-08-07` | [Anthropic Models](https://docs.anthropic.com/en/docs/about-claude/models) |
+| Codex CLI | 400k+ | GPT-5.2-Codex (context compaction) | [OpenAI Models](https://platform.openai.com/docs/models) |
+| Cursor | 1M (Max mode) | Gemini 3 Pro/Flash | [Cursor Models](https://cursor.com/docs/models) |
+| Gemini CLI | 1M | Gemini 3 Pro Preview | [Gemini API](https://ai.google.dev/gemini-api/docs/models) |
+
+[View Full Report](reports/context-comparison.md)
