@@ -1,14 +1,21 @@
 # Context Window Comparison Report
 
-> **Last Updated:** 2026-02-03
+> **Last Updated:** 2026-02-04
 
 ## Claude Code
 
 | Model | Context Window | Max Output | Notes |
 |-------|----------------|------------|-------|
-| Opus 4.5 | 200k | 64k | Premium model, complex reasoning |
-| Sonnet 4.5 | 200k (1M beta) | 64k | Recommended default, use `sonnet[1m]` for extended context |
-| Haiku 4.5 | 200k | 64k | Fastest, high-volume tasks |
+| Opus 4.5 | 200k | 64k | Premium model, complex reasoning, 67% lower cost than predecessor |
+| Sonnet 4.5 | 200k (1M beta) | 64k | Recommended default, context awareness feature, best coding model |
+| Haiku 4.5 | 200k | 64k | Fastest, context awareness feature, unbeatable for UI work |
+
+**Legacy Models (Still Available):**
+- Opus 4.1: 200k tokens, 32k max output
+- Sonnet 4: 200k / 1M beta, 64k max output
+- Sonnet 3.7: 200k tokens, 64k / 128k beta max output
+- Opus 4: 200k tokens, 32k max output
+- Haiku 3: 200k tokens, 4k max output
 
 **Reference:** [Anthropic Models](https://docs.anthropic.com/en/docs/about-claude/models)
 
@@ -22,9 +29,11 @@
 
 ### Key Features
 
-- All 4.5 models support extended thinking
+- All 4.5 models support extended thinking (31,999 token budget by default)
 - 64k max output (up from 4k-32k in previous generations)
 - Automatic context compaction at 75-92% utilization
+- **Context awareness**: Sonnet 4.5 and Haiku 4.5 track remaining context window throughout conversation
+- Context budget: 200K (standard), 500K (Enterprise), 1M (beta for tier 4 orgs)
 
 ---
 
@@ -32,21 +41,21 @@
 
 | Model | Context Window | Max Output | Notes |
 |-------|----------------|------------|-------|
-| GPT-5.2-Codex | 400k | 128k | Default since Jan 2026, context compaction support |
-| GPT-5.1-Codex-Max | 400k+ | 128k | Native context compaction, works across millions of tokens |
-| GPT-5.1-Codex-Mini | 400k | 128k | Lighter, more affordable variant |
-| codex-1 | 192k | - | Specialized o3 variant for coding |
-| codex-mini-latest | 200k | 100k | **Default model**, fine-tuned o4-mini, low-latency |
-| o3 | 200k | 100k | Latest reasoning model |
-| o4-mini | 200k | 100k | Fast, efficient reasoning |
+| GPT-5.2-Codex | 400k | 128k | Latest model (Jan 14, 2026), native compaction, reliable tool calling |
+| GPT-5.1-Codex-Max | Multi-window (millions) | N/A | First model natively trained for compaction |
+| GPT-5-Codex | 200k | N/A | Standard model with 200K context window |
+| codex-mini-latest | ~200k | N/A | **DEPRECATED** - Removed Jan 16, 2026 |
 
 **Reference:** [OpenAI Models](https://platform.openai.com/docs/models)
 
 ### Key Features
 
-- Native context compaction for million-token projects
+- **Context compaction** is now a core feature (not experimental)
+- Automatically summarizes conversation history when approaching limits
+- Enables long-running coding tasks spanning millions of tokens
 - Model switching mid-session with `/model` command
 - ChatGPT account sign-in (no manual API key needed)
+- Agent Skills system production-ready
 
 ---
 
@@ -69,11 +78,10 @@
 
 | Model | Context Window | Max Output | Notes |
 |-------|----------------|------------|-------|
-| GPT-5 | 272k | 128k | Heavyweight reasoning |
-| GPT-5 Fast | 272k | 128k | Faster GPT-5 variant |
-| GPT-5 Mini | 272k | 128k | Cost-optimized |
-| GPT-5 Nano | 272k | 128k | Speed-optimized |
-| GPT-5-Codex | 272k | 128k | Code-specialized |
+| GPT-5.1 Codex Max | 200k (400k max) | 128k | Added Jan 2026, improved tool calls |
+| GPT-5.1 High | 200k (400k max) | 128k | Frontier coding model |
+| GPT-5 Mini | 200k | 128k | Fast, lightweight option |
+| GPT-5 Nano | 200k | 128k | Ultra-fast for simple tasks |
 | GPT 4.1 | 200k (1M max) | 8k | Normal and Max modes |
 | GPT-4o | 128k | 16k | All-purpose |
 | GPT-4o mini | 60k | 8k | Free (500/day) |
@@ -87,29 +95,29 @@
 
 | Model | Context Window | Max Output | Notes |
 |-------|----------------|------------|-------|
+| Gemini 3 Pro Preview | 200k (1M max) | 8k | Top performer on SWE-bench (76.2-78%) |
 | Gemini 2.5 Pro | 200k (1M max) | 8k | Strong for design/debugging |
-| Gemini 2.5 Flash | 1M | 8k | Max mode only |
-| Gemini 2.0 Pro (exp) | 60k | 8k | Experimental |
+| Gemini 2.5 Flash | 200k (1M max) | 8k | Fast inference, extended context |
 
 ### xAI Models
 
 | Model | Context Window | Max Output | Notes |
 |-------|----------------|------------|-------|
-| Grok Code Fast 1 | 256k | - | 70.8% SWE-bench, fastest, $0.20/M input |
+| Grok 4 | 200k (2M max) | - | Real-time web search integration |
+| Grok Code Fast | 200k | - | Optimized for speed |
 
 ### DeepSeek Models
 
 | Model | Context Window | Max Output | Notes |
 |-------|----------------|------------|-------|
-| DeepSeek Coder V2 | 128k | - | Open-source, cost-effective |
-| DeepSeek V3 | 64-128k | - | Native Cursor support, free |
+| DeepSeek V3 | 200k | - | Native support since v0.44+, hosted on US servers |
+| DeepSeek R1 | 200k | - | Native support since v0.45+, free within Pro plan |
 
 ### Cursor Native Models
 
 | Model | Context Window | Max Output | Notes |
 |-------|----------------|------------|-------|
-| Composer 1 | 150-180k | - | Native MoE model, 250 tokens/sec, $1.25/M input |
-| Cursor Small | 60k | 8k | Free, rapid edits |
+| Composer 1 | ~200k | - | 4x faster than comparable models, <30s response |
 
 **Reference:** [Cursor Models](https://cursor.com/docs/models)
 
@@ -118,7 +126,14 @@
 | Mode | Context Range | Cost | Speed |
 |------|---------------|------|-------|
 | Normal | 60k - 400k | Standard | Fast |
-| Max | 200k - 1M | Premium | Slower |
+| Max | 200k - 2M | Premium | Slower |
+
+### Key Features
+
+- Dynamic context discovery reduces token usage by 46.9% for MCP tool calls
+- Automatic summarization when context window fills
+- Chat history preserved as files for context recovery
+- Efficient updates via Merkle tree-based change detection
 
 ---
 
@@ -129,9 +144,11 @@
 | Gemini 3 Pro Preview | 1M | 65k | Current flagship |
 | Gemini 3 Flash Preview | 1M | 65k | Balanced speed/intelligence |
 | Gemini 3 Pro Image Preview | 65k | 32k | Image generation |
-| Gemini 2.5 Pro | 1M | 65k | Retires June 17, 2026 |
-| Gemini 2.5 Flash | 1M | 65k | Retires June 17, 2026 |
-| Gemini 2.5 Flash-Lite | 1M | 65k | Retires July 22, 2026 |
+| Gemini 2.5 Pro | 1M | 65k | Stable |
+| Gemini 2.5 Flash | 1M | 65k | Stable |
+| Gemini 2.5 Flash-Lite | 1M | 65k | Stable |
+| Gemini 2.5 Flash Image | 65k | 32k | Stable |
+| Gemini 2.5 Flash Live | 131k | 8k | Preview |
 | Gemini 2.0 Flash | 1M | 8k | **Deprecated** - March 31, 2026 |
 | Gemini 2.0 Flash-Lite | 1M | 8k | **Deprecated** - March 31, 2026 |
 

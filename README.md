@@ -28,20 +28,20 @@
 
 | Feature | Claude Code | Codex CLI | Gemini CLI | Cursor |
 |---------|:-----------:|:---------:|:----------:|:------:|
-| **Hooks** | ✅ | ⚠️ | ⚠️ | ✅ |
-| **Plugins/MCP** | ✅ | ⚠️ | ✅ | ✅ |
+| **Hooks** | ✅ | ⚠️ | ✅ | ✅ |
+| **Plugins/MCP** | ✅ | ✅ | ✅ | ✅ |
 | **Sub-agents** | ✅ | ✅ | ⚠️ | ✅ |
 | **Slash Commands** | ✅ | ✅ | ✅ | ✅ |
 | **Custom Commands** | ✅ | ✅ | ✅ | ✅ |
 | **IDE Integration** | ✅ | ✅ | ✅ | ✅ |
-| **Git Integration** | ✅ | ✅ | ✅ | ✅ |
+| **Git Integration** | ✅ | ✅ | ⚠️ | ✅ |
 | **Web Search** | ✅ | ✅ | ✅ | ✅ |
 | **Image Support** | ⚠️ | ✅ | ✅ | ⚠️ |
 | **Memory/Persistence** | ⚠️ | ✅ | ✅ | ⚠️ |
 | **Multi-file Editing** | ✅ | ✅ | ✅ | ✅ |
 | **Auto-commit** | ⚠️ | ⚠️ | ✅ | ✅ |
 | **Custom System Prompts** | ✅ | ⚠️ | ✅ | ✅ |
-| **Cost Tracking** | ✅ | ⚠️ | ✅ | ⚠️ |
+| **Cost Tracking** | ✅ | ❌ | ✅ | ⚠️ |
 | **Sandbox Mode** | ❌ | ✅ | ✅ | ⚠️ |
 
 [View Full Report](reports/feature-comparison.md)

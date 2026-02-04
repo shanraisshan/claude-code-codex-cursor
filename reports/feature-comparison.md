@@ -1,6 +1,6 @@
 # Feature Comparison Report
 
-> **Last Updated:** 2026-02-04
+> **Last Updated:** 2026-02-04 (Research Session)
 
 ## Overview
 
@@ -19,43 +19,57 @@ Shell commands triggered by events during AI operation.
 
 | Tool | Status | Details |
 |------|--------|---------|
-| Claude Code | ✅ Full | 8 event types (PreToolUse, PostToolUse, UserPromptSubmit, SessionStart, Notification, Stop, SubagentStop, PreCompact) |
-| Codex CLI | ⚠️ Limited | Only `agent-turn-complete` event supported |
-| Gemini CLI | ⚠️ Experimental | Must be enabled in settings.json; scripts at specific loop points |
-| Cursor | ✅ Full | Lifecycle hooks (beforeSubmitPrompt, beforeShellExecution, afterFileEdit, etc.) |
+| Claude Code | ✅ Full | 12 event types, 3 hook types (command, prompt, agent), async support |
+| Codex CLI | ⚠️ Limited | Only notification hook officially supported; comprehensive hooks proposed but not accepted |
+| Gemini CLI | ✅ Full | Enabled by default since v0.26.0+, scripts at lifecycle events |
+| Cursor | ✅ Full | Enterprise-grade with partner integrations, 10-20x performance improvement |
 
 ### Claude Code Hooks
 
-Claude Code provides the most comprehensive hooks system with 8 event types:
+Claude Code provides the most comprehensive hooks system with 12 event types:
 
 | Event | Trigger |
 |-------|---------|
-| PreToolUse | Before a tool is executed |
-| PostToolUse | After a tool completes |
-| UserPromptSubmit | When user submits a prompt |
-| SessionStart | When a session begins |
-| Notification | For notifications |
-| Stop | When session stops |
-| SubagentStop | When a subagent completes |
+| SessionStart | When session begins/resumes |
+| UserPromptSubmit | Before Claude processes user prompt |
+| PreToolUse | Before tool execution (can block) |
+| PermissionRequest | When permission dialog appears |
+| PostToolUse | After successful tool execution |
+| PostToolUseFailure | After tool execution fails |
+| Notification | When Claude Code sends notifications |
+| SubagentStart | When subagent spawns |
+| SubagentStop | When subagent finishes |
+| Stop | When Claude finishes responding |
 | PreCompact | Before context compaction |
+| SessionEnd | When session terminates |
+
+**Hook Types:**
+- Command hooks (`type: "command"`) - Execute shell scripts
+- Prompt hooks (`type: "prompt"`) - Single-turn LLM evaluation
+- Agent hooks (`type: "agent"`) - Multi-turn subagent with tool access
+- Async hooks support with `"async": true` for non-blocking execution
 
 ### Codex CLI Hooks
 
-Limited to a single event type:
-- `agent-turn-complete`: Triggered when the agent completes a turn
+Limited official support:
+- **Notification hook**: Built-in, triggers when Codex completes a task
+- Comprehensive hooks system proposed (PR #9796) but not yet accepted
 
 ### Gemini CLI Hooks
 
-Experimental feature requiring manual enablement:
-- Must be enabled in `settings.json`
-- Scripts execute at specific points in the agent loop
+Full support (enabled by default since v0.26.0+):
+- Scripts execute at specific points in the agentic loop
+- Extensions can bundle hooks directly
+- Supports variable substitution in hooks/hooks.json
+- Controls and customizes the agent loop at lifecycle events
 
 ### Cursor Hooks
 
-Full lifecycle hooks system:
-- `beforeSubmitPrompt`: Before sending prompt to AI
-- `beforeShellExecution`: Before running shell commands
-- `afterFileEdit`: After file modifications
+Enterprise-grade hooks system (January 2026):
+- Observe, block, and extend agent loop operations
+- Auto-formatting after edits, gating dangerous commands
+- **Performance:** 10-20x faster following January 8, 2026 CLI update
+- **Enterprise Partners:** MintMCP, Oasis Security, Runlayer, Semgrep
 
 ---
 
@@ -66,7 +80,7 @@ Extension system via Model Context Protocol and plugin architecture.
 | Tool | Status | Details |
 |------|--------|---------|
 | Claude Code | ✅ Full | Full MCP support with dynamic tool loading, OAuth support |
-| Codex CLI | ⚠️ MCP Only | No traditional plugin system; MCP servers only |
+| Codex CLI | ✅ Full | MCP + Agent Skills system (production-ready) |
 | Gemini CLI | ✅ Full | Robust extension ecosystem, browse at geminicli.com/extensions |
 | Cursor | ✅ Full | MCP + VS Code extensions (some Microsoft restrictions) |
 
@@ -76,25 +90,29 @@ Extension system via Model Context Protocol and plugin architecture.
 - Dynamic tool loading at runtime
 - OAuth support for authenticated services
 - Configure in `~/.claude/mcp_servers.json`
+- Auto-enable threshold with `auto:N` syntax
 
-### Codex CLI MCP
+### Codex CLI MCP + Agent Skills
 
-- MCP servers supported (no traditional plugins)
-- Available MCP packages:
-  - `codex-as-mcp`: Run Codex as an MCP server
-  - `codex-subagents-mcp`: Multi-agent orchestration
+- **MCP servers** officially supported for third-party tools
+- **Agent Skills** (production-ready): Reusable bundles of instructions
+  - Invoke with `$skill-name` (e.g., `$skill-installer`)
+  - Auto-selected by Codex based on prompt context
+  - Install in `~/.codex/skills` (user) or `.codex/skills` (project)
 
 ### Gemini CLI Extensions
 
 - Robust extension ecosystem at geminicli.com/extensions
-- Categories: Code Analysis, DevOps, Documentation, etc.
+- Package prompts, MCP servers, Agent Skills, and custom commands
+- Easy one-command installation
 - Configure via `/extensions` command
 
 ### Cursor MCP + Extensions
 
-- Full MCP support
+- Full MCP support with `/mcp enable` and `/mcp disable` commands
+- Dynamic context discovery (46.9% token reduction)
 - VS Code extension compatibility (some Microsoft-specific restrictions)
-- Configure MCP servers in Cursor settings
+- MCP governance via partner integrations
 
 ---
 
@@ -274,7 +292,7 @@ Version control features and automation.
 |------|--------|---------|
 | Claude Code | ✅ Full | GitHub + GitLab, PR/MR creation, commit generation |
 | Codex CLI | ✅ Full | Deep git integration, GitHub Actions, review workflows |
-| Gemini CLI | ✅ Full | PR creation, auto-commit, GitHub Actions integration |
+| Gemini CLI | ⚠️ Partial | Git-aware filtering only; native git operations requested |
 | Cursor | ✅ Full | Native git + PR creation via GitHub MCP |
 
 ### Claude Code Git Features
@@ -283,25 +301,33 @@ Version control features and automation.
 - PR/MR creation and management
 - Automatic commit message generation
 - `/commit` and `/pr-comments` commands
+- GitHub Actions integration with `@claude` mentions
+- GitLab CI/CD event-driven automation
 
 ### Codex CLI Git Features
 
 - Deep git integration
+- Built-in `/diff` command for reviewing changes
 - GitHub Actions support
-- Code review workflows
+- Code review workflows with `/review` command
 - Session-based change tracking
 
 ### Gemini CLI Git Features
 
-- PR creation
-- Auto-commit capability
-- GitHub Actions integration
-- `geminicommit` CLI tool
+**Currently Available:**
+- Git-aware filtering: @ commands exclude git-ignored files by default
+- Automatic exclusion of .git/, node_modules/, dist/, .env
+- Can execute git operations through shell commands
+
+**Requested Features (Not Yet Available):**
+- Native git operations (create commits, branches, PRs)
+- Direct git integration tools
 
 ### Cursor Git Features
 
-- Native git support
-- PR creation via GitHub MCP
+- Git history indexing with commit SHAs and parent info
+- Automatic PR indexing for all merged PRs
+- Merkle tree-based efficient updates (10-minute intervals)
 - GitButler integration for auto-commits
 
 ---
@@ -536,28 +562,30 @@ Token usage and cost monitoring.
 
 | Tool | Status | Details |
 |------|--------|---------|
-| Claude Code | ✅ Full | /cost, /stats, third-party tools (ccusage) |
-| Codex CLI | ⚠️ Third-party | /status for limits; requires ccusage, tokscale, CodexBar |
+| Claude Code | ✅ Full | /cost, /stats, workspace-based centralized tracking |
+| Codex CLI | ❌ None | No built-in cost tracking; community-requested feature |
 | Gemini CLI | ✅ Full | /stats, OpenTelemetry, Google Cloud Monitoring dashboards |
 | Cursor | ⚠️ Limited | Basic usage display; no detailed cost breakdown |
 
 ### Claude Code Cost Tracking
 
-- `/cost`: View cost information
-- `/stats`: Session statistics
-- Third-party: `ccusage` tool for detailed tracking
+- `/cost`: Detailed token usage statistics per session
+- `/stats`: Usage patterns (subscribers)
+- Workspace-based centralized cost tracking via Claude Console
+- Auto-created "Claude Code" workspace for organization cost management
+- Context awareness feature tracks remaining context window
 
 ### Codex CLI Cost Tracking
 
-- `/status`: View limits
-- Third-party tools required for detailed tracking:
-  - `ccusage`
-  - `tokscale`
-  - `CodexBar`
+**Current State:** No built-in cost tracking or usage analytics
+- GitHub Issue #5085 proposes cost/usage analytics module
+- Users face unpredictable bills without visibility into session costs
+- Workaround: Manual tracking based on API pricing
 
 ### Gemini CLI Cost Tracking
 
-- `/stats`: Usage statistics
+- `/stats`: Token usage, cached token savings, session duration
+- Summary presented on exit
 - OpenTelemetry integration
 - Google Cloud Monitoring dashboards
 
