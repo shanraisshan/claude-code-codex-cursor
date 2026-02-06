@@ -1,16 +1,18 @@
 # Context Window Comparison Report
 
-> **Last Updated:** 2026-02-04
+> **Last Updated:** 2026-02-06
 
 ## Claude Code
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| Opus 4.5 | 200k | 64k | Premium model, complex reasoning, 67% lower cost than predecessor |
-| Sonnet 4.5 | 200k (1M beta) | 64k | Recommended default, context awareness feature, best coding model |
-| Haiku 4.5 | 200k | 64k | Fastest, context awareness feature, unbeatable for UI work |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| Opus 4.6 | 200k (1M beta) | 128k | $5.00 | $25.00 | Latest model (Feb 5, 2026), adaptive thinking, first Opus with 1M context |
+| Opus 4.5 | 200k | 64k | $5.00 | $25.00 | Premium model, complex reasoning, 67% lower cost than predecessor |
+| Sonnet 4.5 | 200k (1M beta) | 64k | $3.00 | $15.00 | Recommended default, context awareness feature, best coding model |
+| Haiku 4.5 | 200k | 64k | $1.00 | $5.00 | Fastest, context awareness feature, unbeatable for UI work |
 
 **Legacy Models (Still Available):**
+- Opus 4.5: 200k tokens, 64k max output
 - Opus 4.1: 200k tokens, 32k max output
 - Sonnet 4: 200k / 1M beta, 64k max output
 - Sonnet 3.7: 200k tokens, 64k / 128k beta max output
@@ -29,8 +31,9 @@
 
 ### Key Features
 
+- Opus 4.6 supports adaptive thinking with 4 effort levels (low, medium, high, max)
 - All 4.5 models support extended thinking (31,999 token budget by default)
-- 64k max output (up from 4k-32k in previous generations)
+- 128k max output for Opus 4.6; 64k for other 4.5 models
 - Automatic context compaction at 75-92% utilization
 - **Context awareness**: Sonnet 4.5 and Haiku 4.5 track remaining context window throughout conversation
 - Context budget: 200K (standard), 500K (Enterprise), 1M (beta for tier 4 orgs)
@@ -39,12 +42,13 @@
 
 ## Codex CLI
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| GPT-5.2-Codex | 400k | 128k | Latest model (Jan 14, 2026), native compaction, reliable tool calling |
-| GPT-5.1-Codex-Max | Multi-window (millions) | N/A | First model natively trained for compaction |
-| GPT-5-Codex | 200k | N/A | Standard model with 200K context window |
-| codex-mini-latest | ~200k | N/A | **DEPRECATED** - Removed Jan 16, 2026 |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| GPT-5.3-Codex | 400k | 128k | TBD | TBD | Latest model (Feb 5, 2026), "Perfect Recall" attention, 25% faster |
+| GPT-5.2-Codex | 400k | 128k | $1.75 | $14.00 | Native compaction, reliable tool calling (Jan 14, 2026) |
+| GPT-5.1-Codex-Max | Multi-window (millions) | N/A | $1.25 | $10.00 | First model natively trained for compaction |
+| GPT-5-Codex | 200k | N/A | $1.25 | $10.00 | Standard model with 200K context window |
+| codex-mini-latest | ~200k | N/A | - | - | **DEPRECATED** - Removed Jan 16, 2026 |
 
 **Reference:** [OpenAI Models](https://platform.openai.com/docs/models)
 
@@ -63,61 +67,72 @@
 
 ### Anthropic Models
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| Claude 4.5 Sonnet | 200k (1M max) | 64k | Premium, Agent/Thinking modes |
-| Claude 4.1 Opus | 200k | 64k | Max mode only, deep reasoning |
-| Claude 4 Sonnet 1M | 1M | 64k | Max mode only, extended context |
-| Claude 4 Sonnet | 200k | 64k | Normal and Max modes |
-| Claude 4 Opus | 200k | 64k | Max mode only |
-| Claude 3.7 Sonnet | 200k | 64k | Normal and Max modes |
-| Claude 3.5 Sonnet | 200k | 64k | Fast and reliable |
-| Claude 3.5 Haiku | 60k | 8k | Speed-optimized |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| Claude 4.6 Opus | 200k (1M max) | 64k | $5.00 | $25.00 | Latest Opus model, deep reasoning |
+| Claude 4.5 Sonnet | 200k (1M max) | 64k | $3.00 | $15.00 | Premium, Agent/Thinking modes |
+| Claude 4.5 Opus | 200k | 64k | $5.00 | $25.00 | Deep reasoning |
+| Claude 4.5 Haiku | 200k | 64k | $1.00 | $5.00 | Fast and efficient |
+| Claude 4 Sonnet 1M | 1M | 64k | $3.00 | $15.00 | Max mode only, extended context |
+| Claude 4 Sonnet | 200k | 64k | $3.00 | $15.00 | Normal and Max modes |
+| Claude 4 Opus | 200k | 64k | $5.00 | $25.00 | Max mode only |
+| Claude 3.7 Sonnet | 200k | 64k | $3.00 | $15.00 | Normal and Max modes |
+| Claude 3.5 Sonnet | 200k | 64k | $3.00 | $15.00 | Fast and reliable |
+| Claude 3.5 Haiku | 60k | 8k | $0.80 | $4.00 | Speed-optimized |
 
 ### OpenAI Models
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| GPT-5.1 Codex Max | 200k (400k max) | 128k | Added Jan 2026, improved tool calls |
-| GPT-5.1 High | 200k (400k max) | 128k | Frontier coding model |
-| GPT-5 Mini | 200k | 128k | Fast, lightweight option |
-| GPT-5 Nano | 200k | 128k | Ultra-fast for simple tasks |
-| GPT 4.1 | 200k (1M max) | 8k | Normal and Max modes |
-| GPT-4o | 128k | 16k | All-purpose |
-| GPT-4o mini | 60k | 8k | Free (500/day) |
-| o3 | 200k | 8k | Reasoning optimized |
-| o4-mini | 200k | 8k | Normal and Max modes |
-| o3-mini | 200k | 8k | Agent/Thinking modes |
-| o1 | 200k | 8k | Thinking mode |
-| o1 Mini | 128k | 8k | Thinking mode |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| GPT-5.2 (all variants) | 272k | - | $2.00 | $8.00 | Latest generation |
+| GPT-5.2-Codex | 272k | - | $1.75 | $14.00 | Code-optimized |
+| GPT-5.1 Codex Max | 200k (400k max) | 128k | $1.25 | $10.00 | Improved tool calls |
+| GPT-5.1 High | 200k (400k max) | 128k | $1.25 | $10.00 | Frontier coding model |
+| GPT-5 Fast | 272k | - | $1.25 | $10.00 | Speed-optimized |
+| GPT-5 Mini | 200k | 128k | $0.40 | $1.60 | Fast, lightweight option |
+| GPT-5 Nano | 200k | 128k | $0.15 | $0.60 | Ultra-fast for simple tasks |
+| GPT 4.1 | 200k (1M max) | 8k | $2.00 | $8.00 | Normal and Max modes |
+| GPT-4o | 128k | 16k | $2.50 | $10.00 | All-purpose |
+| GPT-4o mini | 60k | 8k | $0.15 | $0.60 | Free (500/day) |
+| o3 | 200k | 8k | $2.00 | $8.00 | Reasoning optimized |
+| o4-mini | 200k | 8k | $1.10 | $4.40 | Normal and Max modes |
+| o3-mini | 200k | 8k | $1.10 | $4.40 | Agent/Thinking modes |
+| o1 | 200k | 8k | $15.00 | $60.00 | Thinking mode |
+| o1 Mini | 128k | 8k | $1.10 | $4.40 | Thinking mode |
 
 ### Google Models
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| Gemini 3 Pro Preview | 200k (1M max) | 8k | Top performer on SWE-bench (76.2-78%) |
-| Gemini 2.5 Pro | 200k (1M max) | 8k | Strong for design/debugging |
-| Gemini 2.5 Flash | 200k (1M max) | 8k | Fast inference, extended context |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| Gemini 3 Pro Preview | 200k (1M max) | 8k | $2.00 | $12.00 | Top performer on SWE-bench (76.2-78%) |
+| Gemini 3 Pro Image Preview | 200k (1M max) | 8k | $2.00 | $12.00 | Multimodal with image generation |
+| Gemini 3 Flash | 200k (1M max) | 8k | $0.50 | $3.00 | Fast inference |
+| Gemini 2.5 Pro | 200k (1M max) | 8k | $1.25 | $10.00 | Strong for design/debugging |
+| Gemini 2.5 Flash | 200k (1M max) | 8k | $0.30 | $2.50 | Fast inference, extended context |
 
 ### xAI Models
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| Grok 4 | 200k (2M max) | - | Real-time web search integration |
-| Grok Code Fast | 200k | - | Optimized for speed |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| Grok 4 | 200k (2M max) | - | $3.00 | $15.00 | Real-time web search integration |
+| Grok Code | 256k | - | $2.00 | $10.00 | Code-optimized |
+| Grok Code Fast | 200k | - | $0.60 | $4.00 | Optimized for speed |
 
 ### DeepSeek Models
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| DeepSeek V3 | 200k | - | Native support since v0.44+, hosted on US servers |
-| DeepSeek R1 | 200k | - | Native support since v0.45+, free within Pro plan |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| DeepSeek V3 | 64k-128k | - | $0.27 | $1.10 | Native support, hosted on US servers |
+| DeepSeek V3.1 | 128k | - | $0.27 | $1.10 | Upgraded context from V3 |
+| DeepSeek R1 | 200k | - | $0.55 | $2.19 | Native support, free within Pro plan |
 
 ### Cursor Native Models
 
-| Model | Context Window | Max Output | Notes |
-|-------|----------------|------------|-------|
-| Composer 1 | ~200k | - | 4x faster than comparable models, <30s response |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Notes |
+|-------|----------------|------------|-----------|------------|-------|
+| Composer 1 | ~200k | - | N/A | N/A | 4x faster than comparable models, <30s response |
+
+> **Note:** Cursor uses subscription pricing ($20/mo Pro, $40/mo Business). API prices shown above are the underlying provider rates, not what Cursor users pay directly.
 
 **Reference:** [Cursor Models](https://cursor.com/docs/models)
 
@@ -139,18 +154,20 @@
 
 ## Gemini CLI
 
-| Model | Context Window | Max Output | Status |
-|-------|----------------|------------|--------|
-| Gemini 3 Pro Preview | 1M | 65k | Current flagship |
-| Gemini 3 Flash Preview | 1M | 65k | Balanced speed/intelligence |
-| Gemini 3 Pro Image Preview | 65k | 32k | Image generation |
-| Gemini 2.5 Pro | 1M | 65k | Stable |
-| Gemini 2.5 Flash | 1M | 65k | Stable |
-| Gemini 2.5 Flash-Lite | 1M | 65k | Stable |
-| Gemini 2.5 Flash Image | 65k | 32k | Stable |
-| Gemini 2.5 Flash Live | 131k | 8k | Preview |
-| Gemini 2.0 Flash | 1M | 8k | **Deprecated** - March 31, 2026 |
-| Gemini 2.0 Flash-Lite | 1M | 8k | **Deprecated** - March 31, 2026 |
+| Model | Context Window | Max Output | Input $/M | Output $/M | Status |
+|-------|----------------|------------|-----------|------------|--------|
+| Gemini 3 Pro Preview | 1M | 65k | $2.00 | $12.00 | Current flagship |
+| Gemini 3 Flash Preview | 1M | 65k | $0.50 | $3.00 | Balanced speed/intelligence - Launched Feb 4, 2026 |
+| Gemini 3 Pro Image Preview | 65k | 32k | $2.00 | $12.00 | Image generation |
+| Gemini 2.5 Pro | 1M | 65k | $1.25 | $10.00 | Stable |
+| Gemini 2.5 Flash | 1M | 65k | $0.30 | $2.50 | Stable |
+| Gemini 2.5 Flash-Lite | 1M | 65k | $0.10 | $0.40 | Stable |
+| Gemini 2.5 Flash Image | 65k | 32k | $0.30 | $2.50 | Stable |
+| Gemini 2.5 Flash Preview | 1M | 65k | $0.30 | $2.50 | Experimental features (Preview) |
+| Gemini 2.5 Flash TTS | 8k | 16k | $0.30 | $2.50 | Text-to-speech (Preview) |
+| Gemini 2.5 Flash Live | 131k | 8k | $0.30 | $2.50 | Preview |
+| Gemini 2.0 Flash | 1M | 8k | $0.10 | $0.40 | **Deprecated** - March 31, 2026 |
+| Gemini 2.0 Flash-Lite | 1M | 8k | $0.08 | $0.30 | **Deprecated** - March 31, 2026 |
 
 **Reference:** [Gemini API](https://ai.google.dev/gemini-api/docs/models)
 
